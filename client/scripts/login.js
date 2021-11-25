@@ -22,7 +22,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 // check if user is logged in
 const navItems = document.querySelectorAll('.nav-item');
-navItems.forEach((item) => {
+const navItemsMobile = document.querySelectorAll('.nav-list-mobile');
+const navigationItems = [...navItems,...navItemsMobile];
+navigationItems.forEach((item) => {
     item.addEventListener('click', (e) => {
         console.log(e.target.textContent);
         let redirectTo = e.target.textContent;
@@ -39,7 +41,7 @@ navItems.forEach((item) => {
                 URL = 'http://localhost:5500/DOG/index.html'
                 window.location.replace(URL)
             } else if(redirectTo.toLowerCase() == 'log out'){
-                URL = 'http://localhost:5500/DOG/index.html'
+                URL = 'http://localhost:5500/index.html'
                 window.location.replace(URL)
             }
             console.log(URL);
@@ -247,27 +249,33 @@ signUpHere.addEventListener('click', () => {
 
 
 // LOGOUT button
-const logOut = document.getElementById('logOut');
-logOut.addEventListener('click', () => {
-    if(sessionStorage.getItem('_guid')){
-        sessionStorage.removeItem('_guid');
-        debugger;
-        Swal.fire({
-          icon: "success",
-          title: "Success...",
-          text: "Log Out...",
-        });
-        window.replace('http://localhost:5500/index.html');
-        // setTimeout(() => {
-            
-        // }, 1000);
-    }
+const logOutDesktop = document.getElementById('logOut');
+const logOutMobile = document.getElementById('logOutMobile');
+const logOutBtns = [logOutDesktop,logOutMobile];
+logOutBtns.forEach((logOut) => {
+    logOut.addEventListener('click', () => {
+        if(sessionStorage.getItem('_guid')){
+            sessionStorage.removeItem('_guid');
+            Swal.fire({
+              icon: "success",
+              title: "Success...",
+              text: "Log Out...",
+            });
+            window.location.replace('http://localhost:5500/index.html');
+            // setTimeout(() => {
+                
+            // }, 1000);
+        }
+    });
 });
 
 
 
 
-// remove RED border when the use is typing
+
+
+
+// remove RED border when the use is typing in username input
 const usernameLogin = document.querySelector("#usernameLogin");
 const passwordLogin = document.querySelector("#passwordLogin");
 const passwordAndIcon = document.querySelector(".passwordAndIcon");
@@ -277,10 +285,55 @@ usernameLogin.addEventListener('keyup', () => {
         usernameAndIcon.classList.remove('invalid-field');
         usernameAndIcon.classList.remove('invalid-field-shake');
     }
-})
+});
+
+// remove RED border when the use is typing in password input
 passwordLogin.addEventListener('keyup', () => {
     if(passwordAndIcon.classList.contains('invalid-field')){
         passwordAndIcon.classList.remove('invalid-field');
         passwordAndIcon.classList.remove('invalid-field-shake');
     }
 })
+
+
+// footer current year
+let currentYear = document.getElementById('currentYear');
+currentYear.textContent = new Date().getFullYear();
+
+// MOBILE VERSION
+
+// open menu slider 
+const hamburgerMenu = document.getElementById('hamburger-menu');
+const navLinksMobile = document.querySelector('.nav-links-mobile');
+const closeMenu = document.getElementById('close-hamburger');
+console.log(closeMenu);
+hamburgerMenu.addEventListener('click', () => {
+    console.log('clicked on hamburger');
+    navLinksMobile.classList.add('widthGrowth');
+    navLinksMobile.classList.remove('widthGrowthReverse');
+    closeMenu.style.display = 'block';
+    hamburgerMenu.style.display = 'none';
+});
+
+
+// close menu slider
+const closeHamburger = document.getElementById('close-hamburger');
+closeHamburger.addEventListener('click', () => {
+    console.log('close menu');
+    navLinksMobile.classList.remove('widthGrowth');
+    navLinksMobile.classList.add('widthGrowthReverse');
+    closeMenu.style.display = 'none';
+    hamburgerMenu.style.display = 'block';
+});
+
+// close menu after user clicked on an menu-item
+const navItemMobile = document.querySelectorAll('.nav-item-mobile');
+navItemMobile.forEach((item) => {
+    item.addEventListener('click', (e) => {
+        e.preventDefault();
+        navLinksMobile.classList.remove("widthGrowth");
+        navLinksMobile.classList.add("widthGrowthReverse");
+        closeMenu.style.display = "none";
+        hamburgerMenu.style.display = "block";
+    });
+});
