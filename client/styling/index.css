@@ -288,6 +288,14 @@ nav .logo .logoTitle{
     display: none;
 }
 
+.decission{
+    background-color: #ff1b68;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @media only screen and (max-width: 715px){
     .navbar{
         display: none;
@@ -340,6 +348,10 @@ nav .logo .logoTitle{
         margin: 2rem 0;
     }
 
+    .nav-item-mobile a{
+        color: #fff;
+    }
+
     #close-hamburger{
         display: none;
         outline: none;
@@ -365,6 +377,22 @@ nav .logo .logoTitle{
     .nav-item-mobile:focus{
         background-color: #ff1b68;
         transition: 0.1s;
+    }
+
+    #choosePathTitle{
+        position: relative;
+        font-size: 1.2rem;
+        top: 0;
+        left: 0;
+    }
+
+    .pathContainer{
+        width: 100%;
+    }
+
+    .card{
+        width: 100%;
+        justify-content: center;
     }
 
 }

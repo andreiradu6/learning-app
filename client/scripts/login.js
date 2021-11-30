@@ -69,8 +69,10 @@ const sendDataLogin = async (url,options) => {
                     title: 'Authentication successful',
                     text:`Now, you can use the navigation bar to go through the pages!`
                   });
+
+                  window.location.replace(`http://localhost:5500/path/path.html`);
             }, 500);
-            document.getElementById('logOut').style.display = '';
+            document.getElementById('logOut').style.display = 'none';
         } else if ((status == 'Success' || status == 200) && message == 'Not Found'){
             console.log('user not found');
             setTimeout(() => {

@@ -6,6 +6,12 @@ const Datastore = require("nedb");
 const db = new Datastore({ filename: "./database.db", autoload: true });
 const Joi = require('joi');
 
+// const Vonage = require('@vonage/server-sdk')
+// let vonage = new Vonage({
+//   apiKey: process.env.APIKEY,
+//   apiSecret: process.env.APISECRET
+// })
+
 const schema = Joi.object({
   username: Joi.string().alphanum().min(3).max(30).required(),
   email: Joi.string().email({
@@ -17,7 +23,6 @@ const schema = Joi.object({
 app.use(express.static("../client"));
 app.use(express.json());
 
-console.log();
 
 app.get("/", (req, res) => {
   // res.json('hello world!');
@@ -47,6 +52,30 @@ app.post("/login", (req, res) => {
             (params.message = "User found in database");
           params.id = docs[0]._id;
           console.log(params);
+
+          // vonage = new Vonage({
+          //   apiKey: "81f64190",
+          //   apiSecret: "20HPxJcaXeeODAMq"
+          // });
+          
+          // const from = 'Learning App';
+          // const to = "40722279654";
+          // const text = 'A text message sent using the Vonage SMS API';
+          
+          // vonage.message.sendSms(from, to, text, (err, responseData) => {
+          //   if (err) {
+          //     console.log(err);
+          //   } else {
+          //     if (responseData.messages[0]["status"] === "0") {
+          //       console.log("Message sent successfully.");
+          //     } else {
+          //       console.log(
+          //         `Message failed with error: ${responseData.messages[0]["error-text"]}`
+          //       );
+          //     }
+          //   }
+          // });
+
           res.status(200).json(params);
         } else {
           console.log("no results found in db");
@@ -137,4 +166,10 @@ app.get("/breed/:id", (req,res) => {
 
 app.listen(process.env.PORT, () => {
   console.log(`app is listening on port ${process.env.PORT}`);
+});
+
+
+
+app.post("/path", (req,res) => {
+  res.status(202).send(req.body);
 });
