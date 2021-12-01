@@ -3,7 +3,20 @@
 /server/node_modules
 /server/.env
 /server/database.db
-
-
+.vscode/
+project.md/
+server/node_modules/
+server/.env/
+server/database.db/
+**/node_modules
+**/.env
+**/database.db
+**/.vscode
+**/project.md
+**/node_modules/
+**/.env/
+**/database.db/
+**/.vscode/
+**/project.md/
 
 
