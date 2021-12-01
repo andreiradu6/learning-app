@@ -1,15 +1,9 @@
-.vscode/
-project.md/
-server/node_modules/
-server/.env/
-server/database.db/
+/.vscode
+/project.md
+/server/node_modules
+/server/.env
+/server/database.db
 
-**/server/node_modules/
-**/server/database.db/
-**/server/.env/
-**/client/images/
-**/.vscode/
-**/project.md/git 
 
 
 
